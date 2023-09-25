@@ -1,0 +1,286 @@
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Generic - Hyperspace by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<header id="header">
+				<a href="index.html" class="title">ROBERT CZECH PORTFOLIO</a>
+				<nav>
+					<ul>
+						<li><a href="index.html">Home</a></li>
+					
+					</ul>
+				</nav>
+			</header>
+		
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<section id="main" class="wrapper">
+						<div class="inner">
+						
+							<span class="image fit"><img src="images/P1.jpg" alt="" /></span>
+							<h2><p style="text-align: center">Data Analysis in SQL and visualization in Tableau</p></h2></br>
+								Data set downloaded from Kaggle.com</br>
+								<li><a href="https://www.kaggle.com/datasets/adityadesai13/used-car-dataset-ford-and-mercedes">100,000 UK Used Car Data set | Kaggle</a></li>
+								
+							<p>
+								<h4>I. What goals have I achieved:</h4>
+								<font size="2">1. Determine the average mileage of BMW cars. </br>
+								2. Compare the average MPG of BMW cars with different transmission types: automatic and manual. </br>
+								3. Contrast other cars based on their average MPG and compare them to BMW cars. </br>
+								4. Calculate the count of BMW cars in three price categories: under $10,000, between $10,000 and  $20,000, and over $20,000.  </br>
+								5. Identify the highest-priced cars that have been sold. </br>
+								6. Identify the lowest-priced cars that have been sold.  </br>
+								7. Create a treemap to visualize the popularity of sold car models. </br>
+								8. Analyze trends in the usage of different transmission types over the years.</font> </br></br>
+								<h4>II. Data Cleaning: </h4> 
+								<font size="2">1. Successfully loaded the dataset into Microsoft SQL Server. </br>
+								2. Ensured the correct data types for each column in the data tables. </br>
+								3. Conducted a thorough check for missing values and removed all NULL values.</font> </br></br>
+								<h4>III. Data Exploration: </h4>
+								<li><a href="https://github.com/robbyxz/soldusedcars/blob/9e98be7bf1fcacb269fac1054518deb81e338f2f/SQL_query">Github Link to SQL Query</a></li>
+								</br>
+<pre><code><font size="1" color="white">-- 1. Determine the average mileage of BMW cars.</b>
+SELECT avg(mileage) as BMW_Average_mileage
+FROM dbo.bmw</font>	</code>
+<a href="#" class="image"><img src="images/1sql.png" alt="" data-position="25% 25%" /></a>
+</pre>
+<pre>
+	<code><font size="1" color="white">-- 2. Compare the average MPG of BMW cars with different transmission types: automatic and manual.									
+SELECT transmission,
+	avg(mpg) as AVG_MPG		
+FROM dbo.bmw
+WHERE transmission IN('Automatic','Manual')
+GROUP BY transmission</font>	</code>
+<a href="#" class="image"><img src="images/2sql.png" alt="" data-position="25% 25%" /></a></p>
+</pre>
+<pre><code><font size="1" color="white">-- 3. Contrast other cars based on their average MPG and compare them to BMW cars.
+SELECT	'BMW' AS BRAND, avg(mpg) as AVG_MPG FROM dbo.bmw
+UNION
+SELECT	'Audi', avg(mpg) from dbo.audi
+UNION
+SELECT	'Ford', avg(mpg) from dbo.ford
+UNION
+SELECT	'Hyundai', avg(mpg) from dbo.hyundi
+UNION
+SELECT	'Mercedes', avg(mpg) from dbo.merc
+UNION
+SELECT	'Skoda', avg(mpg) from dbo.skoda
+UNION
+SELECT	'Vauxhall', avg(mpg) from dbo.vauxhall
+UNION
+SELECT	'VW', avg(mpg) from dbo.vw
+</font>	</code>
+<a href="#" class="image"><img src="images/3sql.png" alt="" data-position="25% 25%" /></a>
+</pre>
+<pre>
+<code><font size="1" color="white">-- 4. Calculate the count of BMW cars in three price categories: under $10,000, between $10,000 and  $20,000, and over $20,000.
+SELECT 
+SUM(CASE WHEN price < 10000 THEN 1 ELSE 0 END) AS Under_10000,
+SUM(CASE WHEN price >= 10000 AND price <= 20000 THEN 1 ELSE 0 END) AS Between_10000_and_20000,
+SUM(CASE WHEN price > 20000 THEN 1 ELSE 0 END) AS Over_20000
+FROM dbo.bmw</font>	</code>
+<a href="#" class="image"><img src="images/4sql.png" alt="" data-position="25% 25%" /></a>
+</pre>
+<pre>
+	<code><font size="1" color="white">-- 5. Identify the highest-priced cars that have been sold.
+WITH RankedCars AS (
+SELECT 'BMW' as 'brand', model, year, price, 
+		ROW_NUMBER() OVER (PARTITION BY 'Brand' ORDER BY price desc) AS rn
+FROM dbo.bmw
+UNION ALL
+SELECT 'AUDI' as 'brand', model, year, price, 
+		ROW_NUMBER() OVER (PARTITION BY 'brand' ORDER BY price desc) AS rn
+FROM dbo.audi
+UNION ALL
+SELECT 'Ford' as 'brand', model, year, price, 
+		ROW_NUMBER() OVER (PARTITION BY 'brand' ORDER BY price desc) AS rn
+FROM dbo.ford
+	UNION ALL
+SELECT 'Hyundai' as 'brand', model, year, price, 
+		ROW_NUMBER() OVER (PARTITION BY 'brand' ORDER BY price desc) AS rn
+FROM dbo.hyundi
+UNION ALL
+SELECT 'Mercedes' as 'brand', model, year, price, 
+		ROW_NUMBER() OVER (PARTITION BY 'brand' ORDER BY price desc) AS rn
+FROM dbo.merc
+UNION ALL
+SELECT 'Skoda' as 'brand', model, year, price, 
+		ROW_NUMBER() OVER (PARTITION BY 'brand' ORDER BY price desc) AS rn
+FROM dbo.skoda
+UNION ALL
+SELECT 'Vauxhall' as 'brand', model, year, price, 
+		ROW_NUMBER() OVER (PARTITION BY 'brand' ORDER BY price desc) AS rn
+FROM dbo.vauxhall
+UNION ALL
+SELECT 'VW' as 'brand', model, year, price, 
+		ROW_NUMBER() OVER (PARTITION BY 'brand' ORDER BY price desc) AS rn
+FROM dbo.vw
+)
+SELECT Brand, Model, Year, Price
+FROM RankedCars
+where rn = 1
+order by price desc</font>	</code>
+<a href="#" class="image"><img src="images/5sql.png" alt="" data-position="25% 25%" /></a>
+</pre>
+<pre>
+<code><font size="1" color="white">-- 6. Identify the lowest-priced cars that have been sold.
+WITH RankedCars AS (
+SELECT 'BMW'as 'brand', model, year, price, 
+		ROW_NUMBER() OVER (PARTITION BY 'Brand' ORDER BY price) AS rn
+FROM dbo.bmw
+UNION ALL
+SELECT 'AUDI' as 'brand', model, year, price, 
+		ROW_NUMBER() OVER (PARTITION BY 'brand' ORDER BY price) AS rn
+FROM dbo.audi
+UNION ALL
+SELECT 'Ford' as 'brand', model, year, price, 
+		ROW_NUMBER() OVER (PARTITION BY 'brand' ORDER BY price) AS rn
+FROM dbo.ford
+	UNION ALL
+SELECT 'Hyundai' as 'brand', model, year, price, 
+		ROW_NUMBER() OVER (PARTITION BY 'brand' ORDER BY price) AS rn
+FROM dbo.hyundi
+UNION ALL
+SELECT 'Mercedes' as 'brand', model, year, price, 
+		ROW_NUMBER() OVER (PARTITION BY 'brand' ORDER BY price) AS rn
+FROM dbo.merc
+UNION ALL
+SELECT 'Skoda' as 'brand', model, year, price, 
+		ROW_NUMBER() OVER (PARTITION BY 'brand' ORDER BY price) AS rn
+FROM dbo.skoda
+UNION ALL
+SELECT 'Vauxhall' as 'brand', model, year, price, 
+		ROW_NUMBER() OVER (PARTITION BY 'brand' ORDER BY price) AS rn
+FROM dbo.vauxhall
+UNION ALL
+SELECT 'VW' as 'brand', model, year, price, 
+		ROW_NUMBER() OVER (PARTITION BY 'brand' ORDER BY price) AS rn
+FROM dbo.vw
+)
+SELECT Brand, Model, Year, Price
+FROM RankedCars
+where rn = 1
+order by price</font>	</code>
+<a href="#" class="image"><img src="images/6sql.png" alt="" data-position="25% 25%" /></a>
+</pre>
+<pre>
+<code><font size="1" color="white">-- 7. Create a treemap to visualize the popularity of sold car models.
+SELECT top 50 model, SUM(Sold_models) AS Total_Sold_Models
+FROM (
+SELECT model, COUNT(*) AS Sold_models FROM dbo.bmw GROUP BY model
+UNION ALL
+SELECT model, COUNT(*) FROM dbo.audi GROUP BY model
+UNION ALL
+SELECT model, COUNT(*) FROM dbo.ford GROUP BY model
+UNION ALL
+SELECT model, COUNT(*) FROM dbo.hyundi GROUP BY model
+UNION ALL
+SELECT model, COUNT(*) FROM dbo.merc GROUP BY model
+UNION ALL
+SELECT model, COUNT(*) FROM dbo.skoda GROUP BY model
+UNION ALL
+SELECT model, COUNT(*) FROM dbo.vauxhall GROUP BY model
+UNION ALL
+SELECT model, COUNT(*) FROM dbo.vw GROUP BY model
+) AS CombinedData
+GROUP BY model
+ORDER BY Total_Sold_Models DESC;</font>	</code>
+<a href="#" class="image"><img src="images/7sql.png" alt="" data-position="25% 25%" /></a>
+</pre>
+<pre>
+<code><font size="1" color="white">-- 8. Analyze trends in the usage of different transmission types over the years.
+WITH transm AS (
+SELECT transmission, year, count(*) as sold_cars 
+FROM dbo.bmw
+group by transmission, year
+UNION ALL
+SELECT transmission, year, count(*)
+FROM dbo.audi
+group by transmission, year
+UNION ALL
+SELECT transmission, year, count(*)
+FROM dbo.ford
+group by transmission, year
+UNION ALL
+SELECT transmission, year, count(*)
+FROM dbo.hyundi
+group by transmission, year
+UNION ALL
+SELECT transmission, year, count(*)
+FROM dbo.merc
+group by transmission, year
+UNION ALL
+SELECT transmission, year, count(*)
+FROM dbo.skoda
+group by transmission, year
+UNION ALL
+SELECT transmission, year, count(*)
+FROM dbo.vauxhall
+group by transmission, year
+UNION ALL
+SELECT transmission, year, count(*)
+FROM dbo.vw
+group by transmission, year
+
+)
+SELECT distinct transmission, Year, sum(sold_cars) as sold_cars2
+FROM transm
+group by transmission, year
+order by sold_cars2 desc</font>	</code>
+<a href="#" class="image"><img src="images/8sql1.png" alt="" data-position="25% 25%" /></a><a href="#" class="image"><img src="images/8sql2.png" alt="" data-position="25% 25%" /></a><a href="#" class="image"><img src="images/8sql3.png" alt="" data-position="25% 25%" /></a>
+</pre>
+<h4>IV. Data Visualization: </h4>
+<div class='tableauPlaceholder' id='viz1695581485582' style='position: relative'><noscript><a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Us&#47;Usedcars_16952204418830&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Usedcars_16952204418830&#47;Dashboard1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Us&#47;Usedcars_16952204418830&#47;Dashboard1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1695581485582');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1200px';vizElement.style.height='1027px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1200px';vizElement.style.height='1027px';} else { vizElement.style.width='100%';vizElement.style.height='1927px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+	</br>
+<h4>V. Conclusions: </h4>
+<font size="2" color="white">Our analysis reveals that BMW cars, on average, have a mileage of 25,496 miles.</br>
+When examining BMW's fuel economy, we found that BMW cars equipped with automatic transmissions have an average fuel efficiency of 61 MPG, while those with manual transmissions average 58 MPG.</br></br>
+Among all the car brands included in our study, BMW holds the third position in terms of average fuel economy. Notably, every brand in our dataset boasts a fuel economy exceeding 50 MPG. Ford takes the top spot in this regard, with Audi rounding out the list in the last position.</br>
+The Vauxhall Astra holds the distinction of being the most affordable car in our dataset, selling for a mere £450. On the opposite end of the spectrum, the Mercedes G Class stands out as the most expensive car sold, commanding a price of £159,999.</br>
+The Ford Fiesta emerges as the most popular selling car model, with a staggering 6,557 units sold. The Volkswagen Golf follows closely behind, with 4,863 units finding buyers.</br></br>
+Manual transmission cars take the lead in popularity, with the highest sales recorded in 2017 at 12,447 units. In contrast, automatic transmission cars do not enjoy the same level of popularity, peaking in sales in 2019 with 6,136 units sold.</br>
+</font>
+				
+								</code>
+								</pre>
+							</p>
+							
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper alt">
+				<div class="inner">
+					<ul class="menu">
+				
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

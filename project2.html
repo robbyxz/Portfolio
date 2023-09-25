@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Generic - Hyperspace by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<header id="header">
+				<a href="index.html" class="title">ROBERT CZECH PORTFOLIO</a>
+				<nav>
+					<ul>
+						<li><a href="index.html">Home</a></li>
+				
+					</ul>
+				</nav>
+			</header>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<section id="main" class="wrapper">
+						<div class="inner">
+						
+							<span class="image fit"><img src="images/P2.jpg" alt="" /></span>
+							<h2><p style="text-align: center">Data Exploration in SQL and visualization in Tableau</p></h2></br>
+								Data set downloaded from Kaggle.com</br>
+								<li><a href="https://www.kaggle.com/datasets/iamsouravbanerjee/world-population-dataset">world-population-dataset | Kaggle</a></li>
+								
+							<p>
+								<h4>I. What goals have I achieved:</h4>
+								<font size="2">1. Create interactive dashboard, which will show us population of chosen countries.</br>
+								2. Show in KPI’s and sparkline charts population of the following countries: United Kingdom, France, Germany, Spain, Poland</br>
+								3. Compare that countries using line chart.</br>
+								4. What is the top 10 countries with the highest population over years?</br>
+								5. Show Europe map with total population per each country, also growth rate in percentage.</font></br></br>
+
+								<h4>II. Approach</h4>
+								<font size="2">My main approach was to make the interactive dashboard, which will helps the viewer to understand and filter data as they want. 
+								For example dashboard allows to choose year and KPIs, charts and also map filter map by years.</font></br></br>
+
+
+								<h4>III. Data Cleaning: </h4> 
+								<p><font size="2">First, I started by looking closely at all the columns in the dataset. I wanted to understand what each column meant and why it was important. This was the first step in making sure I really understood the data.
+								After I finished examining the columns, I made a special table called a pivot table. In this table, I collected the population numbers for each year that was in the dataset.</p>
+								This pivot table was like the key to my analysis because it helped me organize the data by different years, which I represented as DATE(YEAR).
+								Then, I did something else. I created a parameter that included all the years I found in the pivot table. This parameter was important because it allowed me to connect it to the charts on the dashboard. </br>
+								<p>This connection made the charts interactive, so people using them could easily look at data for different years. It made exploring the data over different years simple and accurate.</font></p>
+								<h4>IV. Data Exploration: </h4>
+								<li><a href="https://github.com/robbyxz/europe-population/blob/main/sql-query">Github Link to SQL Query</a></li>
+								</br>
+
+<h4>V. Data Visualization: </h4>
+<font size="2">I utilized user-friendly terminology to ensure accessibility for all dashboard users. Tableau was chosen for its robust chart customization capabilities. 
+Interactive KPIs, charts, and maps were incorporated to enhance user-friendliness and expedite insights.</font></br>
+<div class='tableauPlaceholder' id='viz1695664040518' style='position: relative'><noscript><a href='#'><img alt='new ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Wo&#47;WorldPopulation2_0&#47;new&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='WorldPopulation2_0&#47;new' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Wo&#47;WorldPopulation2_0&#47;new&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1695664040518');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1200px';vizElement.style.height='1027px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1200px';vizElement.style.height='1027px';} else { vizElement.style.width='100%';vizElement.style.height='2727px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+</br>
+<h4>VI. Conclusions: </h4>
+<font size="2"><p>The population of the United Kingdom has increased by approximately 21 million people from 1980 to 2023. Furthermore, based on predictions, the population is expected to reach nearly 72 million by 2050.</br>
+In contrast, Poland had a population of 35.5 million in 1980, which grew to around 41 million by 2023. However, the projections for 2050 indicate a decline, with the population expected to drop below 35 million.<br>
+Notably, only the United Kingdom and France are anticipated to experience population growth through 2050. Conversely, Germany, Spain, and Poland are expected to undergo more substantial population declines during this period.</br>
+You can see something important in the line chart. The blue line, which stands for the United Kingdom, and the yellow line, which shows France, are both going up.</p>
+In 1980, China held the top position in the world in terms of population, with India following closely in second place. However, as of 2023, we observe a significant shift, with India's population experiencing substantial growth, nearly matching that of China. This shift has propelled India to the number one spot globally in terms of population.</br>
+Looking ahead to 2050, predictions suggest that India's population is expected to increase by approximately 240 million people. This projection underscores the continued demographic changes and challenges the country may face in the coming decades.</br></font>
+
+				
+								
+
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper alt">
+				<div class="inner">
+					<ul class="menu">
+						
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
